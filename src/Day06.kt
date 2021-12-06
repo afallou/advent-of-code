@@ -35,12 +35,15 @@ fun main() {
             .toMutableMap()
 
         for (i in 1..iterationCount) {
+//            Count of fish that start this iteration with 0 days left
             val zeroCount = fishDaysMap.getOrDefault(0, 0)
             for (day in 0.rangeTo(YOUNGSTER_START_COUNT - 1)) {
                 fishDaysMap[day] = fishDaysMap.getOrDefault(day + 1, 0)
             }
             val maxDayCount = fishDaysMap.getOrDefault(FISH_CYCLE_DAYS - 1, 0)
+//            Fish that were at 0 go back to 6 days...
             fishDaysMap[FISH_CYCLE_DAYS - 1] = maxDayCount + zeroCount
+//            ...and spawn a new generation
             fishDaysMap[YOUNGSTER_START_COUNT] = zeroCount
         }
         return fishDaysMap.map { it.value }.sum()
