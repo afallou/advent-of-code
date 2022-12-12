@@ -2,3 +2,6 @@
 .idea
 build
 .coverage
+
+/build
+/rust-2022/target
